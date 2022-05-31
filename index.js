@@ -2,8 +2,6 @@
 ; (function (undefined) {  //undefined在老的浏览器是不被支持，增加一个形参undefined，就算外部的 undefined 定义了，里面的 undefined 依然不受影响；
   "use strict"
   var _global;
-  import {Canvas} from './canvas'
-  import {Slider} from './slider'
   function  bindDom(dom){
     try {
       this.dom = document.getElementById(dom)
