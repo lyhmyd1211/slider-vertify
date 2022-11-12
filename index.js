@@ -16,7 +16,7 @@
   let moveDistance = 0 //滑块移动的距离
   let randomX = 0
   let sliderMain = null
-  
+  let isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent)
 
   /**深度合并对象 */
   function extend() {
@@ -222,6 +222,7 @@
   }
 
   function mouseUpFn(callback) {
+    console.log('移动结束')
     if (sliderActive) {
       if (moveDistance !== 0) {
         //有实际移动距离
@@ -251,6 +252,8 @@
       }
       document.removeEventListener('mouseup', mouseUpFn.bind(this))
       document.removeEventListener('mousemove', moveEvent)
+      document.removeEventListener('touchmove',moveEvent);
+      document.removeEventListener('touchend',mouseUpFn.bind(this));
     }
     
   }
@@ -266,12 +269,14 @@
     let sliderBlock = document.createElement('div')
     sliderBlock.className = 'slider-block'
     let that = this
-    sliderBlock.onmousedown = function (e) {
+    console.log('isMobile',isMobile)
+    sliderBlock.ontouchstart = function (e) {
+      console.log('开始触摸')
       if (finished) {
         //如果是完成的状态不响应事件
         return
       }
-      const moveStart = e.clientX
+      const moveStart = e.clientX||e.touches[0].clientX
       const moveStartY = e.clientY
       sliderActive = true //按下滑块激活状态
       
@@ -279,8 +284,9 @@
         if (sliderActive) {
           //滑块移动的事件
           isSliding = true //移动滑块 正在移动的状态
-          const moveEnd = ev.clientX
+          const moveEnd = ev.clientX||ev.touches[0].clientX
           const movingY = ev.clientY
+          console.log('开始移动',moveEnd,sliderMain)
           // console.log('moveStartY', moveStartY, movingY)
           // console.log('moveEnd', moveEnd)
           let moving = moveEnd - moveStart //移动的距离
@@ -294,12 +300,14 @@
                 : moving
 
           }
+          console.log('moveDistance',moveDistance)
           track.style.width = moveDistance+60+'px'
           that.blockCanvas.style.transform = 'translateX(' + moveDistance + 'px)'
           // document.addEventListener('mouseup', mouseUpFn.bind(that)) //移动之后开始监听鼠标抬起事件
         }
       }
       document.addEventListener('mousemove', moveEvent)
+      document.addEventListener('touchmove',moveEvent);
     }
     let triangle = document.createElement('div')
     triangle.className = 'triangle'
@@ -309,6 +317,7 @@
     sliderMain.appendChild(track)
     dom.appendChild(sliderMain)
     document.addEventListener('mouseup', mouseUpFn.bind(that,callback)) //移动之后开始监听鼠标抬起事件
+    document.addEventListener('touchend',mouseUpFn.bind(that,callback));
   }
 
 
