@@ -1,0 +1,119 @@
+.slider-main {
+  height: 40px;
+  border: 1px solid #dcdfe6;
+  border-radius: 5px;
+  position: relative;
+  margin-bottom: 5px;
+}
+.main-success {
+  border: 1px solid rgba(103, 194, 58, 0.6);
+}
+.slider-block {
+  margin: 5px;
+  width: 50px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  border-radius: 5px;
+  position: absolute;
+  right: 0px;
+}
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 12px solid #8892a4;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  position: absolute;
+  top: 7px;
+  left: 28px;
+  pointer-events: none;
+}
+  .triangle::before{
+    content: '';
+    width: 18px;
+    height: 4px;
+    display: inline-block;
+    position: absolute;
+    left: -30px;
+    top: -2px;
+    background-color: #8892a4;
+  }
+
+.track {
+z-index: 1;
+width: 60px;
+height: 40px;
+overflow: hidden;
+border-radius: 5px;
+position: relative;
+}
+.track:hover,.track:active{
+  background-color: #90b2f6;
+}
+.track:hover>.slider-block,.track:active>.slider-block{
+  outline: 1px solid #eee;
+  background-color: #fff;
+}
+.track:hover>.slider-block>.triangle,.track:active>.slider-block>.triangle{
+  border-left: 12px solid #3c77f1;
+}
+.track:hover>.slider-block>.triangle::before,.track:active>.slider-block>.triangle::before{
+    background-color: #3c77f1;
+}
+    /* &:hover,
+    &:active {
+      background-color: #90b2f6;
+      .slider-block {
+        outline: 1px solid #eee;
+        background-color: #fff;
+        .triangle {
+          border-left: 12px solid #3c77f1;
+          &::before {
+            background-color: #3c77f1;
+          }
+        }
+      }
+    } 
+     &.success {
+      background-color: #87cc9b;
+      .slider-block {
+        outline: 1px solid #eee;
+        background-color: #fff;
+        .triangle {
+          border-left: 12px solid #2ab44f;
+          &::before {
+            background-color: #2ab44f;
+          }
+        }
+      }
+    }
+    &.error {
+      background-color: #eb7f7f;
+      .slider-block {
+        outline: 1px solid #eee;
+        background-color: #fff;
+        .triangle {
+          border-left: 12px solid #f56c6c;
+          &::before {
+            background-color: #f56c6c;
+          }
+        }
+      }
+    } 
+   } 
+   .start-vertify {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    text-indent: 100px;
+    font-size: 14px;
+    color: rgb(188, 191, 199);
+    &:hover {
+      color: #3c77f1;
+    }
+  }  */
