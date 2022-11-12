@@ -269,9 +269,7 @@
     let sliderBlock = document.createElement('div')
     sliderBlock.className = 'slider-block'
     let that = this
-    console.log('isMobile',isMobile)
-    sliderBlock.ontouchstart = function (e) {
-      console.log('开始触摸')
+    function start (e) {
       if (finished) {
         //如果是完成的状态不响应事件
         return
@@ -286,7 +284,6 @@
           isSliding = true //移动滑块 正在移动的状态
           const moveEnd = ev.clientX||ev.touches[0].clientX
           const movingY = ev.clientY
-          console.log('开始移动',moveEnd,sliderMain)
           // console.log('moveStartY', moveStartY, movingY)
           // console.log('moveEnd', moveEnd)
           let moving = moveEnd - moveStart //移动的距离
@@ -300,7 +297,6 @@
                 : moving
 
           }
-          console.log('moveDistance',moveDistance)
           track.style.width = moveDistance+60+'px'
           that.blockCanvas.style.transform = 'translateX(' + moveDistance + 'px)'
           // document.addEventListener('mouseup', mouseUpFn.bind(that)) //移动之后开始监听鼠标抬起事件
@@ -309,6 +305,8 @@
       document.addEventListener('mousemove', moveEvent)
       document.addEventListener('touchmove',moveEvent);
     }
+    console.log('isMobile',isMobile)
+    isMobile? sliderBlock.ontouchstart = start:sliderBlock.onmousedown = start
     let triangle = document.createElement('div')
     triangle.className = 'triangle'
 
